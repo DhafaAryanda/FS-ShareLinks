@@ -22,7 +22,7 @@ export default function FormContainer({
 }) {
   const [loading, setLoading] = useState<boolean>(false)
 
-  const { form } = useFormAction({ values: values ?? { title: '', url: '' } })
+  const { form } = useFormAction({ values })
 
   const onSubmit = async (values: formType) => {
     setLoading(true)
