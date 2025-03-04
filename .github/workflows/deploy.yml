@@ -3,11 +3,12 @@ name: Deploy to Vercel
 on:
   push:
     tags:
-      - v**
+      - 'v**'
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    steps: |
+    steps:
       - name: Trigger Deployment
-        run: curl -X POST "https://api.vercel.com/v1/integrations/deploy/prj_m2ULAdcRwvdXADFzZciFDDsaWLbd/NfgQYdX20J"
+        run: |
+          curl -X POST "https://api.vercel.com/v1/integrations/deploy/prj_m2ULAdcRwvdXADFzZciFDDsaWLbd/NfgQYdX20J"
