@@ -3,15 +3,15 @@ import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
+import { GetServerSidePropsContext } from 'next'
 import { getToken } from 'next-auth/jwt'
-import { signIn, signOut, useSession } from 'next-auth/react'
+import { signIn } from 'next-auth/react'
 
 export default function Login() {
-  const session = useSession()
+  // const session = useSession()
   return (
     <div className="container mx-auto">
       <Card>
@@ -29,7 +29,9 @@ export default function Login() {
   )
 }
 
-export const getServerSideProps = async (context: any) => {
+export const getServerSideProps = async (
+  context: GetServerSidePropsContext,
+) => {
   const token = await getToken({
     req: context.req,
     secret: process.env.NEXTAUTH_SECRET,

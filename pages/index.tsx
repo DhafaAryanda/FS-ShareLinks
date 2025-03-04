@@ -1,35 +1,22 @@
 import { Button } from '@/components/ui/button'
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card'
+import { Card, CardContent } from '@/components/ui/card'
 
-import {
-  Drawer,
-  DrawerClose,
-  DrawerContent,
-  DrawerDescription,
-  DrawerFooter,
-  DrawerHeader,
-  DrawerTitle,
-  DrawerTrigger,
-} from '@/components/ui/drawer'
-import FormContainer from '@/container/FormContainer'
-import { useRef, useState } from 'react'
+import { Drawer, DrawerContent } from '@/components/ui/drawer'
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from '@/components/ui/popover'
+import FormContainer from '@/container/FormContainer'
 import { getToken } from 'next-auth/jwt'
+import { useRef, useState } from 'react'
 
+import { signOut, useSession } from 'next-auth/react'
 import useSWR from 'swr'
-import { useSession, signOut } from 'next-auth/react'
+import { GetServerSidePropsContext } from 'next'
 
-const fetcher = (...args) => fetch(...args).then((res) => res.json())
+const fetcher = (...args: Parameters<typeof fetch>) =>
+  fetch(...args).then((res) => res.json())
 
 export default function Home() {
   const session = useSession()
@@ -66,7 +53,7 @@ export default function Home() {
           <h1 className="text-xl font-bold">
             {`Hello, ${session.data?.user?.email}`}
           </h1>
-          <p>This is an area to create yout links, let's put here!</p>
+          <p>This is an area to create yout links, lets put here!</p>
           <Button variant={'link'} size={'sm'} onClick={() => signOut()}>
             SignOut
           </Button>
@@ -158,7 +145,9 @@ export default function Home() {
   )
 }
 
-export const getServerSideProps = async (context: any) => {
+export const getServerSideProps = async (
+  context: GetServerSidePropsContext,
+) => {
   const token = await getToken({
     req: context.req,
     secret: process.env.NEXTAUTH_SECRET,

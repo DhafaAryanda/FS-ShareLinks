@@ -2,15 +2,13 @@ import { Button } from '@/components/ui/button'
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
-import useFormAction from '@/hooks/useFormAction'
-import { formType } from '@/hooks/useFormAction'
+import useFormAction, { formType } from '@/hooks/useFormAction'
 import { useState } from 'react'
 
 export default function FormContainer({
@@ -24,7 +22,7 @@ export default function FormContainer({
 }) {
   const [loading, setLoading] = useState<boolean>(false)
 
-  const { form } = useFormAction({ values })
+  const { form } = useFormAction({ values: values ?? { title: '', url: '' } })
 
   const onSubmit = async (values: formType) => {
     setLoading(true)
